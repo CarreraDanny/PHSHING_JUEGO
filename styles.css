@@ -1,0 +1,567 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0c1445 0%, #1e3c72 50%, #2563eb 100%);
+    color: white;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.puce-logo {
+    height: 48px;
+    width: auto;
+}
+
+.title-section {
+    flex: 1;
+    text-align: center;
+}
+
+.title-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: white;
+}
+
+.title-section p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.aguila-logo {
+    height: 64px;
+    width: auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Game Stats */
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: rgba(37, 99, 235, 0.2);
+    border: 2px solid rgba(59, 130, 246, 0.5);
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 120px;
+    color: #e0f2fe;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.stat-label {
+    margin-right: 8px;
+    color: white;
+}
+
+/* Screen Management */
+.screen {
+    display: block;
+}
+
+.screen.hidden {
+    display: none;
+}
+
+/* Instructions Screen */
+.instructions-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(30, 60, 114, 0.4);
+    border: 2px solid rgba(59, 130, 246, 0.6);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+}
+
+.instructions-content h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.instructions-list {
+    list-style: none;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+}
+
+.instructions-list li {
+    padding: 12px 0;
+    padding-left: 35px;
+    position: relative;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    color: #4ade80;
+    font-size: 1.2rem;
+}
+
+.start-button {
+    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+    color: white;
+    padding: 15px 30px;
+    border: 2px solid #60a5fa;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.start-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+    background: linear-gradient(45deg, #1d4ed8, #1e40af);
+    border-color: #93c5fd;
+}
+
+/* Game Screen */
+.round-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.emails-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .emails-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Email Card Styles - Matching React Design */
+.email-card {
+    background: rgba(30, 60, 114, 0.3);
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 400px;
+    color: white;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+}
+
+.email-card:hover {
+    background: rgba(30, 60, 114, 0.5);
+    border-color: rgba(59, 130, 246, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.4);
+}
+
+.email-card.selected {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.email-card.correct {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.email-card.incorrect {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.email-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.email-from-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.email-from-section i {
+    color: white;
+    margin-top: 4px;
+    font-size: 1.1rem;
+}
+
+.email-info {
+    flex: 1;
+}
+
+.email-from {
+    font-weight: 600;
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.email-sender {
+    color: #d1d5db;
+    font-size: 0.9rem;
+}
+
+.email-time {
+    color: #d1d5db;
+    font-size: 0.9rem;
+}
+
+.email-subject {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.email-body {
+    color: #e5e7eb;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.email-footer {
+    color: #d1d5db;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+    margin-top: auto;
+}
+
+.email-label {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #3b82f6;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.suspicious-link {
+    color: #fbbf24;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Result Screen */
+.result-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.result-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+}
+
+.result-message.correct {
+    background: rgba(16, 185, 129, 0.2);
+    border: 2px solid rgba(16, 185, 129, 0.5);
+}
+
+.result-message.incorrect {
+    background: rgba(239, 68, 68, 0.2);
+    border: 2px solid rgba(239, 68, 68, 0.5);
+}
+
+.explanation-box {
+    background: rgba(30, 60, 114, 0.4);
+    border: 2px solid rgba(59, 130, 246, 0.6);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: left;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+}
+
+.explanation-box h3 {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#explanation-list {
+    list-style: none;
+    color: #e5e7eb;
+}
+
+#explanation-list li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    padding-left: 20px;
+    position: relative;
+}
+
+#explanation-list li:before {
+    content: "•";
+    color: #4ade80;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.next-button, .restart-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.next-button {
+    background: rgba(59, 130, 246, 0.3);
+    color: white;
+    border: 2px solid #60a5fa;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.restart-button {
+    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+    color: white;
+    border: 2px solid #60a5fa;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.next-button:hover, .restart-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Final Screen */
+.final-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(30, 60, 114, 0.4);
+    border: 2px solid rgba(59, 130, 246, 0.6);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+}
+
+.final-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.final-score {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.final-message {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.final-message.perfect {
+    background: rgba(16, 185, 129, 0.2);
+    border: 2px solid rgba(16, 185, 129, 0.5);
+    color: #10b981;
+}
+
+.final-message.excellent {
+    background: rgba(16, 185, 129, 0.2);
+    border: 2px solid rgba(16, 185, 129, 0.5);
+    color: #10b981;
+}
+
+.final-message.good {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.final-message.needs-practice {
+    background: rgba(251, 191, 36, 0.2);
+    border: 2px solid rgba(251, 191, 36, 0.5);
+    color: #fbbf24;
+}
+
+.final-message.poor {
+    background: rgba(239, 68, 68, 0.2);
+    border: 2px solid rgba(239, 68, 68, 0.5);
+    color: #ef4444;
+}
+
+/* Security Tips */
+.security-tips {
+    margin-top: 50px;
+    padding: 30px;
+    background: rgba(30, 60, 114, 0.4);
+    border: 2px solid rgba(59, 130, 246, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+}
+
+.security-tips h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.tip-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.tip-item i {
+    color: #4ade80;
+    font-size: 1.3rem;
+    min-width: 24px;
+}
+
+.tip-item span {
+    color: #e5e7eb;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .title-section h1 {
+        font-size: 2rem;
+    }
+    
+    .game-stats {
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 10px 15px;
+        min-width: 100px;
+    }
+    
+    .instructions-content {
+        padding: 30px 20px;
+    }
+    
+    .final-content {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 15px;
+    }
+    
+    .title-section h1 {
+        font-size: 1.8rem;
+    }
+    
+    .email-card {
+        padding: 15px;
+        min-height: 350px;
+    }
+    
+    .result-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .next-button, .restart-button {
+        width: 200px;
+    }
+}
